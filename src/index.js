@@ -4,6 +4,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import configurations from "./configs/index.js";
+import taskRouter from "./routes/task.routes.js";
 
 const corsOptions = {
     allowedHeaders: ["Authorization","Content-Type"],
@@ -14,6 +15,7 @@ const corsOptions = {
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/task', taskRouter);
 
 mongoose.connect("mongodb://localhost:27017/zenkit")
 .then(() => {
