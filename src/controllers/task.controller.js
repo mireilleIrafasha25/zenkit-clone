@@ -18,6 +18,10 @@ export const addTask = async(req, res, next) => {
 export const getTasks = async(req, res, next) => {
 try{
     const tasks=await TaskModel.find()
+    if(!tasks)
+    {
+        res.status(404).json({message:"Task not found"})
+    }
     res.status(200).json({task:tasks})
 }
 catch(error)
@@ -30,6 +34,9 @@ res.status(500).json({message:"Internal server error"})
 export const updateTask = async(req, res, next) => {
 try{
     const updatedtask=await TaskModel.findByIdAndUpdate(req.params.id,req.body,{set:true})
+    if(!updatedtask){
+res.status(404).json({message:"Task not found"})
+    }
     res.status(200).json({task:updatedtask})
 }
 catch(error)
@@ -41,8 +48,12 @@ catch(error)
 }
 
 export const deleteTask = async(req, res, next) => {
+    try{
 const deletedTask=await TaskModel.findByIdAndDelete(req.params.id)
-try{
+if(!deletedTask){
+res.status(404).json({message:"Task not found"})
+}
+
     res.status(200).json({task:deletedTask})
 }
 catch(error)
