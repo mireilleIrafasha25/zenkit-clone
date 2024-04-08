@@ -5,6 +5,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import configurations from "./configs/index.js";
 import taskRouter from "./routes/task.routes.js";
+import swagger from '../doc/swagger.json' assert {type:'json'};
+import swaggerUi from "swagger-ui-express"
 
 const corsOptions = {
     allowedHeaders: ["Authorization","Content-Type"],
@@ -24,7 +26,7 @@ mongoose.connect("mongodb://localhost:27017/zenkit")
 .catch(err => {
     console.log(err);
 })
-
+app.use('/api_doc',swaggerUi.serve,swaggerUi.setup(swagger))
 app.listen(configurations.PORT, () => {
     console.log(`Server is running on port ${configurations.PORT}`);
 })

@@ -1,0 +1,153 @@
+{
+    "swagger":"2.0",
+    "info":
+    {
+        "title":"Zenkit Apps",
+        "description":"Api for Zenkit Applictaion",
+        "version":"1.0.0"
+    },
+    "host":"localhost:2000",
+    "basepath":"",
+    "schemes":["http","https"],
+    "paths":
+    {
+        "/add":{
+            "post":{
+                "summary":"create a Task",
+                "description":"Creation of task",
+                "tags":["Zenkit"],
+                "parameters":[
+                    {
+                        "in":"body",
+                        "name":"Zenkit_Body",
+                        "schema":{
+                            "$ref":"#/definitions/Zenkit"
+                        },
+                        "required":true,
+                        "description":"Zenkit_Object"
+                    }
+                ],
+                "responses":{
+                    "201":{
+                        "description":"Task created successfully"
+                    }
+                }
+            }
+        },
+        "/list":
+        {
+            "get":{
+                "summary":"get All Tasks",
+                "description":"Getting a task by id",
+                "tags":["Zenkit"],
+                "responses":{
+                    "200":{
+                        "description":"Alltask listed "
+                    }
+                }
+            }
+            },
+        
+    "update/{id}":{
+        "put": {
+            "summary": "Update a task by ID",
+            "description": "Update a task by ID",
+            "tags": ["Zenkit"],
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "description": "ID of the task to update",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "in": "body",
+                "name": "Zenkit_body",
+                "schema": {
+                  "$ref": "#/definitions/RCR"
+                },
+                "required": true,
+                "description": "Updated Zenkit object"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Task updated"
+              },
+              "404": {
+                "description": "Task not found"
+              }
+            }
+          }
+        },
+        
+    "/delete/{id}":
+    {
+        "delete": {
+          "summary": "Delete a task by ID",
+          "description": "Delete a task by ID",
+          "tags": ["Zenkit"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the task to delete",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "task deleted"
+            },
+            "404": {
+              "description": "task not found"
+            }
+          }
+        }}},
+
+    "definitions":
+    {
+        "Zenkit":
+        {
+            "type":"object",
+            "properties":{
+                "name":{
+                    "type":"string",
+                    "default":"Shopping"
+                },
+                "description":{
+                    "type":"string",
+                    "default":"Shopping"
+                },
+                "status":{
+                    "type":"string",
+                    "default":"Shopping"
+                },
+                "dueDate":{
+                    "startDate":{
+                        "type":"date"
+                    },
+                    "endDate":{
+                        "type":"date"
+                    },
+                    "startTime":{
+                        "type":"string"
+                    },
+                    "endTime":{
+                        "type":"string"
+                    },
+                    "duration":{
+                        "type":"Number"
+                    },
+                    "durationType":{
+                        "type":"string"
+                    }
+                }
+            }
+        },
+        "required":["name","description","status"]
+    }
+
+}
