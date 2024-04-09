@@ -7,6 +7,7 @@ import configurations from "./configs/index.js";
 import taskRouter from "./routes/task.routes.js";
 import swagger from '../doc/swagger.json' assert {type:'json'};
 import swaggerUi from "swagger-ui-express"
+import notfound from "../notfound/notfound.js";
 
 const corsOptions = {
     allowedHeaders: ["Authorization","Content-Type"],
@@ -18,6 +19,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/task', taskRouter);
+app.use(notfound);
 
 mongoose.connect("mongodb://localhost:27017/zenkit")
 .then(() => {
