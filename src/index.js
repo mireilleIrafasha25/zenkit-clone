@@ -8,6 +8,7 @@ import taskRouter from "./routes/task.routes.js";
 import swagger from '../doc/swagger.json' assert {type:'json'};
 import swaggerUi from "swagger-ui-express"
 import notfound from "../notfound/notfound.js";
+import errorhandler from "../middleware/errorhandler/errorhandler.js";
 
 const corsOptions = {
     allowedHeaders: ["Authorization","Content-Type"],
@@ -32,3 +33,4 @@ app.use('/api_doc',swaggerUi.serve,swaggerUi.setup(swagger))
 app.listen(configurations.PORT, () => {
     console.log(`Server is running on port ${configurations.PORT}`);
 })
+app.use(errorhandler);

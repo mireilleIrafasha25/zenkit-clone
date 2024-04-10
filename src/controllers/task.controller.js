@@ -11,7 +11,8 @@ export const addTask = async(req, res, next) => {
 
     } 
     catch (error) {
-        return res.status(500).json({ message: error.message.split(":")[2].trim() });
+        //return res.status(500).json({ message: error.message.split(":")[2].trim() });
+        next(error)
     }
 };
 
@@ -20,9 +21,9 @@ try{
     const tasks=await TaskModel.find()
     if(!tasks)
     {
-        res.status(404).json({message:"Task not found"})
+     return    res.status(404).json({message:"Task not found"})
     }
-    res.status(200).json({task:tasks})
+   return res.status(200).json({task:tasks})
 }
 catch(error)
 {
@@ -35,9 +36,9 @@ export const updateTask = async(req, res, next) => {
 try{
     const updatedtask=await TaskModel.findByIdAndUpdate(req.params.id,req.body,{set:true})
     if(!updatedtask){
-res.status(404).json({message:"Task not found"})
+ return res.status(404).json({message:"Task not found"})
     }
-    res.status(200).json({task:updatedtask})
+   return res.status(200).json({task:updatedtask})
 }
 catch(error)
 {
@@ -51,10 +52,10 @@ export const deleteTask = async(req, res, next) => {
     try{
 const deletedTask=await TaskModel.findByIdAndDelete(req.params.id)
 if(!deletedTask){
-res.status(404).json({message:"Task not found"})
+return res.status(404).json({message:"Task not found"})
 }
 
-    res.status(200).json({task:deletedTask})
+  return  res.status(200).json({task:deletedTask})
 }
 catch(error)
 {
