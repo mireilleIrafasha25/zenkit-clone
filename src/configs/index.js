@@ -10,4 +10,4 @@ const Configs = {
     JWT_REFRESH_COOKIE_NAME: process.env.JWT_REFRESH_COOKIE_NAME,
 }
 
-export default Configs;
+export default Configs; 

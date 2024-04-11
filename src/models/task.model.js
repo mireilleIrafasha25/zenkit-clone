@@ -46,7 +46,7 @@ const TaskSchema = new Schema({
                 values: ["Minutes","Hours","Days", "Weeks", "Months"],
                 message: "{VALUE} is not a valid duration type",
             },
-            default: "Days",
+            //default: "Days",
         }
     }
 });

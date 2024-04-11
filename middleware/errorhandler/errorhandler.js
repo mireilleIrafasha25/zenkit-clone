@@ -1,14 +1,15 @@
 import { json } from "express";
 
-const errorhandler=(err,req,res,next)=>
-{
-const errStatus= err.statusCode || 500;
-const Errmessage= err.message || "Internal server error";
-res.status(errStatus).json({
-    success:false,
-    status:errStatus,
-    message:Errmessage,
-    stack:process.env.NODE_ENV=="development" ? err.stack : {}
-})
+
+const errorHandler=(err,req,res,next) => {
+    const errstatus=err.statusCode || 500;
+    const errmessage=err.message|| "Internal Server Error";
+    res.status(errstatus).json({
+        success:false,
+        status:errstatus,
+        message:errmessage 
+        ,
+        stack:process.env.NODE_ENV=="development" ? err.stack : {}
+    })
 }
-export default errorhandler;
+export default errorHandler;
