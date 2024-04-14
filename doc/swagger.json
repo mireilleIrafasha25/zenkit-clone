@@ -6,12 +6,12 @@
         "description":"Api for Zenkit Applictaion",
         "version":"1.0.0"
     },
-    "host":"localhost:2000",
+    "host":"localhost:2001",
     "basepath":"",
     "schemes":["http","https"],
     "paths":
     {
-        "/add":{
+        "/task/add":{
             "post":{
                 "summary":"create a Task",
                 "description":"Creation of task",
@@ -34,7 +34,7 @@
                 }
             }
         },
-        "/list":
+        "/task/list":
         {
             "get":{
                 "summary":"get All Tasks",
@@ -48,7 +48,7 @@
             }
             },
         
-    "update/{id}":{
+    "task/update/{id}":{
         "put": {
             "summary": "Update a task by ID",
             "description": "Update a task by ID",
@@ -65,7 +65,7 @@
                 "in": "body",
                 "name": "Zenkit_body",
                 "schema": {
-                  "$ref": "#/definitions/RCR"
+                  "$ref": "#/definitions/Zenkit"
                 },
                 "required": true,
                 "description": "Updated Zenkit object"
@@ -82,7 +82,7 @@
           }
         },
         
-    "/delete/{id}":
+    "/task/delete/{id}":
     {
         "delete": {
           "summary": "Delete a task by ID",
@@ -122,15 +122,14 @@
                     "default":"Shopping"
                 },
                 "status":{
-                    "type":"string",
-                    "default":"Shopping"
+                    "type":"string"
                 },
-                "dueDate":{
+                
                     "startDate":{
-                        "type":"date"
+                        "type":"string"
                     },
                     "endDate":{
-                        "type":"date"
+                        "type":"string"
                     },
                     "startTime":{
                         "type":"string"
@@ -144,10 +143,10 @@
                     "durationType":{
                         "type":"string"
                     }
-                }
+                
             }
         },
-        "required":["name","description","status"]
+        "required":["name","description","status","startDate","endDate"]
     }
 
 }

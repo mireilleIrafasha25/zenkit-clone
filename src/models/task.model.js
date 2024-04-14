@@ -18,14 +18,14 @@ const TaskSchema = new Schema({
         },
         default: "Todo",
     },
-    dueDate: {
+    
         startDate: {
-            type: Date,
-            required: false,
+            type: String,
+            required: true,
         },
         endDate: {
-            type: Date,
-            required: false,
+            type: String,
+            required: true,
         },
         startTime: {
             type: String,
@@ -35,7 +35,7 @@ const TaskSchema = new Schema({
             type: String,
             required: false,
         },
-        duration: {
+       duration: {
             type: Number,
             required: false,
         },
@@ -48,7 +48,7 @@ const TaskSchema = new Schema({
             },
             //default: "Days",
         }
-    }
+    
 });
 
 const Task = model("Task", TaskSchema);

@@ -1,29 +1,16 @@
 import TaskModel from '../models/task.model.js';
-
+import moment from "moment";
+import  ExpressValidator, { body, validationResult }  from 'express-validator';
 export const test = (req, res, next) => {
     res.send('Hello World!');
 }
-export const SetTime=(req,res,next)=>
-{
-    console.log(req.body.dueDate)
-    var startTime="";
-    var endTime="";
-    if(req.body.dueDate.startDate){
-        startTime=new Date(req.body.dueDate.startDate).toLocaleTimeString();
-    }
-    if(req.body.dueDate.endDate){
-    endTime=new Date(req.body.dueDate.endDate).toLocaleTimeString();
-    }
-    req.body.dueDate.startTime=startTime;
-    req.body.dueDate.endTime=endTime;
-    console.log(req.body.dueDate);
-    //your task
-    //calculate the duration of your task
-    // determine whether  duration  is min ,sec or hours 
 
-    next();
-}
 export const addTask = async(req, res, next) => {
+    const errors= validationResult(req);
+   if(!errors.isEmpty())
+    {
+        return res.status(400).json({errors:errors.array()})
+    }
     try {
         const newTask = await TaskModel.create(req.body);
         return res.status(201).json(newTask);
@@ -49,7 +36,7 @@ catch(error)
 next(error);
 }
 }
-new Date("2024-04-10T09:43:004").toLocaleTimeString()
+//new Date("2024-04-10T09:43:004").toLocaleTimeString()
 export const updateTask = async(req, res, next) => {
 try{
     const updatedtask=await TaskModel.findByIdAndUpdate(req.params.id,req.body,{set:true})
